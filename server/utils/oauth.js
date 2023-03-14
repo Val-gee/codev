@@ -26,6 +26,6 @@ var ids = {
     }
 };
 
-export default ids
+module.exports = ids
 
 

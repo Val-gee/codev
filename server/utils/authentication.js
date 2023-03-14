@@ -5,7 +5,7 @@ var GithubStrategy = require('passport-github2').Strategy;
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
 var InstagramStrategy = require('passport-instagram').Strategy;
 
-var { User } = require('../models');
+var { User, Profile } = require('../models');
 
 var config = require('./oauth.js');
 
@@ -48,8 +48,9 @@ module.exports =
         callbackURL: config.twitter.callbackURL
     },
     function(accessToken, refreshToken, profile, done) {
-        console.log('PROFILE: ', profile);
+        console.log('PROFILE!: ', profile);
         User.findOne({ oauthID: profile.id }, function (err, user) {
+            console.log("USER!: ", user);
             if (err) {
                 console.log(err)
             }
@@ -59,7 +60,17 @@ module.exports =
                 // add parameters of user model
                 user = new User({
                     oauthID: profile.id,
-                    name: profile.displayName
+                    firstname: "test",
+                    lastname: "test",
+                    username: profile.displayName
+                })
+                user.save(function (err) {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        console.log("Saving user...");
+                        done(null, user)
+                    }
                 })
             }
         })

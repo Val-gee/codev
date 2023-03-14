@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const Profile = require('./Profile')
+const userProfileSchema = require('./Profile')
 const bcrypt = require("bcrypt");
 
 const userSchema = new Schema(
@@ -22,7 +22,7 @@ const userSchema = new Schema(
       unique: true,
       required: true,
     },
-    profile: Profile,
+    profile: userProfileSchema,
     projects: [
       {
         type: Schema.Types.ObjectId,
