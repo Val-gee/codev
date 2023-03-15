@@ -5,7 +5,6 @@ const typeDefs = gql`
 
   type User {
     _id: ID!
-    oauthID: Number
     firstname: String!
     lastname: String!
     username: String!

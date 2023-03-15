@@ -4,9 +4,6 @@ const bcrypt = require("bcrypt");
 
 const userSchema = new Schema(
   {
-    oauthID: {
-      type: Number,
-    },
     firstname: {
       type: String,
       required: true,
