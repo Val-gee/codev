@@ -23,9 +23,9 @@ if (process.env.NODE_ENV === "production") {
 }
 // console.log('Runtime:', process.env.NODE_ENV);
 // apparently, when using modern frontend frameworks/libs like react or angular, this handler code isnt needed bc it already does this by default; we can test later
-app.get("*", (req, res) => {
-  res.sendFile("../client/build/index.html");
-});
+// app.get("*", (req, res) => {
+//   res.sendFile("../client/build/index.html");
+// });
 
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
