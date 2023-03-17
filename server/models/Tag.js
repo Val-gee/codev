@@ -4,6 +4,8 @@ const tagSchema = new Schema({
   name: {
     type: String,
   },
+
 });
+
 
 module.exports = tagSchema;
