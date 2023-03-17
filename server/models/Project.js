@@ -26,11 +26,11 @@ const projectSchema = new Schema(
         ref: "User",
       },
     ],
-    // owner: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "User",
-    //   required: true,
-    // },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     collaborators: [
       {
         type: Schema.Types.ObjectId,
