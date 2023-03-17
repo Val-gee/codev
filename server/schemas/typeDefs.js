@@ -10,7 +10,7 @@ const typeDefs = gql`
     projects: [Project]
     friends: [User]
     email: String!
-    password: String! 
+    password: String!
   }
   type Project {
     _id: ID!
@@ -18,7 +18,7 @@ const typeDefs = gql`
     projectDescription: String!
     projectRequirements: String!
     tags: [Tag]
-    owner: User!
+    owner: User
     collaborators: [User]
   }
   input ProjectInput {
@@ -30,31 +30,31 @@ const typeDefs = gql`
     collaborators: [String]
   }
   type UserProfile {
-    user: ID!,
-    profilePicture: String,
-    bio: String,
-    location: String,
+    user: ID!
+    profilePicture: String
+    bio: String
+    location: String
     contact: Contact
   }
   input UserProfileInput {
-    user: ID!,
-    profilePicture: String,
-    bio: String,
-    location: String,
+    user: ID!
+    profilePicture: String
+    bio: String
+    location: String
     contact: ContactInput
   }
   type Contact {
-    github: String,
-    linkedIn: String,
+    github: String
+    linkedIn: String
     website: String
   }
   input ContactInput {
-    github: String,
-    linkedIn: String,
+    github: String
+    linkedIn: String
     website: String
   }
   type Tag {
-  name: String
+    name: String
   }
   input TagInput {
     name: String
@@ -70,15 +70,20 @@ const typeDefs = gql`
     project(_id: ID): Project
     allProjects: [Project]
     userProfile(user: ID!): UserProfile
+    projectByTag(name: String!): [Project]
   }
 
   type Mutation {
-    # need to add ': Auth' to mutations that require users to be logged in (login, new user, add project)
     login(username: String!, password: String!): Auth
-    newUser(firstname: String!, lastname: String!, username: String!, password: String!, email: String!): Auth
+    newUser(
+      firstname: String!
+      lastname: String!
+      username: String!
+      password: String!
+      email: String!
+    ): Auth
     addProject(projectInput: ProjectInput!): User
-    # requestCollab(project: ProjectInput!): User
-    createOrUpdateUserProfile(input: UserProfileInput!): UserProfile!
+    createOrUpdateUserProfile(profileInput: UserProfileInput!): User
   }
 `;
 
