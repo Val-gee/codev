@@ -10,16 +10,10 @@ const typeDefs = gql`
     projects: [Project]
     friends: [User]
     email: String!
-    password: String!
-  }
-  input UserInput {
-    firstname: String!
-    lastname: String!
-    username: String!
-    email: String!
-    password: String!
+    password: String! 
   }
   type Project {
+    _id: ID!
     projectName: String!
     projectDescription: String!
     projectRequirements: String!
@@ -33,7 +27,6 @@ const typeDefs = gql`
     projectRequirements: String!
     tags: [TagInput]
     interested: [String]
-    owner: String!
     collaborators: [String]
   }
   type UserProfile {
@@ -82,7 +75,7 @@ const typeDefs = gql`
   type Mutation {
     # need to add ': Auth' to mutations that require users to be logged in (login, new user, add project)
     login(username: String!, password: String!): Auth
-    newUser(input: UserInput!): Auth
+    newUser(firstname: String!, lastname: String!, username: String!, password: String!, email: String!): Auth
     addProject(projectInput: ProjectInput!): User
     # requestCollab(project: ProjectInput!): User
     createOrUpdateUserProfile(input: UserProfileInput!): UserProfile!
