@@ -10,7 +10,7 @@ const typeDefs = gql`
     projects: [Project]
     friends: [User]
     email: String!
-    password: String!
+    # password: String!
   }
   type Project {
     _id: ID!

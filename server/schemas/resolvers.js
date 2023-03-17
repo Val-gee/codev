@@ -21,7 +21,7 @@ const resolvers = {
       return project;
     },
     allProjects: async () => {
-      return Project.find().populate("owner", "tags");
+      return Project.find().populate("owner").populate("tags");
     },
     projectByTag: async (parent, { name }) => {
       console.log(name);
@@ -32,10 +32,6 @@ const resolvers = {
       console.log(projects);
       return projects;
     },
-    // allTags: async ( parent, { name }) => {
-    //     console.log(name)
-    //     return await Tag.find(name)
-    // }
   },
   Mutation: {
     login: async (parent, { username, password }) => {
@@ -69,11 +65,12 @@ const resolvers = {
             owner: context.user._id,
           });
           console.log(project);
-          return await User.findOneAndUpdate(
+          const user = await User.findOneAndUpdate(
             { _id: context.user._id },
             { $addToSet: { projects: project } },
             { new: true }
-          );
+          ).populate('projects');
+          return user
         } else {
           throw new AuthenticationError("You are not signed in!");
         }
@@ -82,23 +79,24 @@ const resolvers = {
         throw new Error("Failed to create project!");
       }
     },
-  },
-  createOrUpdateUserProfile: async (parent, { profileInput }, context) => {
-    console.log(context.user);
-    try {
-      if (context.user) {
-        return await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $set: { profile: { ...profileInput } } },
-          { new: true }
-        );
-      } else {
-        throw new AuthenticationError("Could not update profile at this time.");
+    createOrUpdateUserProfile: async (parent, { profileInput }, context) => {
+      console.log(context.user);
+      try {
+        if (context.user) {
+          const user = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $set: { profile: { ...profileInput } } },
+            { new: true }
+          ).populate('projects');
+          return user
+        } else {
+          throw new AuthenticationError("Could not update profile at this time.");
+        }
+      } catch (err) {
+        console.log(err);
+        throw new AuthenticationError("You must be logged in!");
       }
-    } catch (err) {
-      console.log(err);
-      throw new AuthenticationError("You must be logged in!");
-    }
+    },
   },
 };
 
