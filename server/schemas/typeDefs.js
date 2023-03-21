@@ -69,7 +69,7 @@ const typeDefs = gql`
     allUsers: [User]
     project(_id: ID): Project
     allProjects: [Project]
-    userProfile(user: ID!): UserProfile
+    # userProfile(user: ID!): UserProfile
     projectByTag(name: String!): [Project]
   }
 

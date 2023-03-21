@@ -32,6 +32,24 @@ const resolvers = {
       console.log(projects);
       return projects;
     },
+    //do we need a userProfile query? can we just get the profile from the user query above?
+    // userProfile: async (parent, { user }, context) => {
+    //     console.log(user)
+    //     console.log(context.user)
+    //       try {
+    //         if (context.user) {
+    //           const userProfile = await User.findAll({user: user})
+    //             .populate("projects")
+    //             .populate("profile");
+    //           return userProfile;
+    //         } else {
+    //           throw new AuthenticationError("You must be logged in!");
+    //         }
+    //       } catch (err) {
+    //         console.log(err);
+    //         throw new Error("No user with that ID");
+    //       }
+    // }
   },
   Mutation: {
     login: async (parent, { username, password }) => {
