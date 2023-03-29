@@ -83,7 +83,7 @@ const typeDefs = gql`
       email: String!
     ): Auth
     addProject(projectInput: ProjectInput!): User
-    removeProject(project: ID!): User
+    removeProject(id: ID!): User
     createOrUpdateUserProfile(profileInput: UserProfileInput!): User
   }
 `;
