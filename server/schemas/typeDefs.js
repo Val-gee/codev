@@ -10,7 +10,7 @@ const typeDefs = gql`
     projects: [Project]
     friends: [User]
     email: String!
-    password: String!
+    # password: String!
   }
   type Project {
     _id: ID!
@@ -69,7 +69,7 @@ const typeDefs = gql`
     allUsers: [User]
     project(_id: ID): Project
     allProjects: [Project]
-    userProfile(user: ID!): UserProfile
+    # userProfile(user: ID!): UserProfile
     projectByTag(name: String!): [Project]
   }
 

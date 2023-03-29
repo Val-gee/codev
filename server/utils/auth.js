@@ -5,6 +5,7 @@ const expiration = '3h';
 
 module.exports = {
     authMiddleware: function ({ req }) {
+        // req.query.token checks if the token params is in the string of the HTTP request
         let token = req.body.token || req.query.token || req.headers.authorization;
 
         if (req.headers.authorization) {
