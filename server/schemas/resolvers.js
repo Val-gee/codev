@@ -84,6 +84,7 @@ const resolvers = {
         throw new Error("Failed to create project!");
       }
     },
+    //works
     removeProject: async (parent, { id }, context) => {
       try {
         if (context.user) {
