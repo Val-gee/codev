@@ -84,15 +84,18 @@ const resolvers = {
         throw new Error("Failed to create project!");
       }
     },
-    removeProject: async (parent, { project }, context) => {
-      console.log("Removing project...", project);
+    //works
+    removeProject: async (parent, { id }, context) => {
       try {
         if (context.user) {
           const user = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $pull: { projects: { _id: project} } },
+            { $pullAll: { projects: [id] } },
             { new: true }
-          )
+          );
+
+          const deleteProject = await Project.findByIdAndDelete(id);
+
           return user
         } else {
           throw new AuthenticationError("You must be signed in!")

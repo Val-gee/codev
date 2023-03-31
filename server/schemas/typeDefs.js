@@ -10,7 +10,6 @@ const typeDefs = gql`
     projects: [Project]
     friends: [User]
     email: String!
-    # password: String!
   }
   type Project {
     _id: ID!
@@ -69,7 +68,6 @@ const typeDefs = gql`
     allUsers: [User]
     project(_id: ID): Project
     allProjects: [Project]
-    # userProfile(user: ID!): UserProfile
     projectByTag(name: String!): [Project]
   }
 
@@ -83,7 +81,7 @@ const typeDefs = gql`
       email: String!
     ): Auth
     addProject(projectInput: ProjectInput!): User
-    removeProject(project: ID!): User
+    removeProject(id: ID!): User
     createOrUpdateUserProfile(profileInput: UserProfileInput!): User
   }
 `;
