@@ -83,6 +83,7 @@ const typeDefs = gql`
     addProject(projectInput: ProjectInput!): User
     removeProject(id: ID!): User
     createOrUpdateUserProfile(profileInput: UserProfileInput!): User
+    addFriend(id: ID!): User
   }
 `;
 

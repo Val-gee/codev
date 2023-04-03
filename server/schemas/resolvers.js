@@ -124,6 +124,27 @@ const resolvers = {
         throw new AuthenticationError("You must be logged in!");
       }
     },
+    addFriend: async (parent, { id }, context) => {
+      console.log(context.user);
+      try {
+        if (context.user) {
+
+          const addFriend = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: { friends: id} },
+            { new: true }
+          );
+          const friend = await User. findById(id);
+
+          return addFriend, friend;
+        } else {
+          throw new AuthenticationError("You must be logged in!")
+        }
+      } catch (err) {
+        console.log(err);
+        throw new AuthenticationError("Failed to add friend")
+      }
+    }
   },
 };
 
