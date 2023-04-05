@@ -9,7 +9,9 @@ const resolvers = {
     user: async (parent, { _id }) => {
       const user = await User.findById(_id)
         .populate("projects")
-        .populate("profile");
+        .populate("profile")
+        .populate("friends")
+        .populate("friendRequests");
       return user;
     },
     //works
@@ -173,7 +175,7 @@ const resolvers = {
             { _id: context.user._id },
             { $addToSet: { friends: id }, $pull: { friendRequests: id } },
             { new: true }
-          );
+          ).populate("friends");
           const addingFriend = await User.findOneAndUpdate(
             { _id: id },
             { $addToSet: { friends: context.user._id } },
