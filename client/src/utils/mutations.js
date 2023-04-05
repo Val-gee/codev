@@ -345,6 +345,7 @@ mutation AddFriend($addFriendId: ID!) {
     }
     friends {
       _id
+      username
     }
     friendRequests {
       _id
@@ -363,7 +364,7 @@ mutation AddFriend($addFriendId: ID!) {
 //       "username": "String",
 //       "profile": *profile picture and bio*,
 //       "projects": [*array of projects with _id, projectname, and projectdescription],
-//       "friends": [{*array of friend id objects}],
+//       "friends": [{*array of friend id and username objects}],
 //       "friendRequests": [{array of friend request objects}],
 //       "email": "context.user.email"
 //     }
