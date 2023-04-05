@@ -32,6 +32,12 @@ const userSchema = new Schema(
         ref: "User",
       },
     ],
+    friendRequests: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      }
+    ],
     email: {
       type: String,
       required: true,

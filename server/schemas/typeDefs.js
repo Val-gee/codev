@@ -9,6 +9,7 @@ const typeDefs = gql`
     profile: UserProfile
     projects: [Project]
     friends: [User]
+    friendRequests: [User]
     email: String!
   }
   type Project {
@@ -83,6 +84,9 @@ const typeDefs = gql`
     addProject(projectInput: ProjectInput!): User
     removeProject(id: ID!): User
     createOrUpdateUserProfile(profileInput: UserProfileInput!): User
+    addFriend(id: ID!): User
+    removeFriend(id: ID!): User
+    sendFriendRequest(toUserId: ID!): Boolean
   }
 `;
 
