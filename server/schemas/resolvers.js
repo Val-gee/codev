@@ -125,27 +125,70 @@ const resolvers = {
       }
     },
     //works
+    sendFriendRequest: async (parent, { toUserId }, context) => {
+      console.log(context.user);
+      try {
+        if (!context.user) {
+          throw new AuthenticationError("You must be logged in!")
+        }
+
+        const currentUserId = context.user._id;
+
+        const existingRequest = await User.findOne({
+          _id: toUserId,
+          friendRequests: currentUserId
+        });
+        if (existingRequest) {
+          throw new Error("You have already sent a request to this person!");
+        }
+
+        const existingFriend = await User.findOne({
+          _id: toUserId,
+          friends: currentUserId
+        });
+        if (existingFriend) {
+          throw new Error("You are already friend's with this person.")
+        }
+
+        const request = await User.updateOne(
+          { _id: toUserId },
+          { $addToSet: { friendRequests: currentUserId } }
+        )
+        if (request) {
+          return true;
+        } else {
+          return false
+        }
+      } catch (err) {
+        console.log(err);
+        throw new Error("Failed to send friend request!")
+      }
+    },
+    //works
     addFriend: async (parent, { id }, context) => {
       console.log(context.user);
       try {
         if (context.user) {
-
           const addFriend = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $addToSet: { friends: id } },
+            { $addToSet: { friends: id }, $pull: { friendRequests: id } },
             { new: true }
           );
-          const friend = await User.findById(id);
-
-          return addFriend, friend;
+          const addingFriend = await User.findOneAndUpdate(
+            { _id: id },
+            { $addToSet: { friends: context.user._id } },
+            { new: true }
+          );
+          return addFriend;
         } else {
           throw new AuthenticationError("You must be logged in!")
         }
       } catch (err) {
         console.log(err);
-        throw new AuthenticationError("Failed to add friend")
+        throw new Error("Failed to add friend!")
       }
     },
+    //works
     removeFriend: async (parent, { id }, context) => {
       console.log(context.user);
       try {
@@ -153,6 +196,12 @@ const resolvers = {
           const removeFriend = await User.findOneAndUpdate(
             { _id: context.user._id },
             { $pull: { friends: id } },
+            { new: true }
+          );
+
+          const removingFriend = await User.findOneAndUpdate(
+            { _id: id },
+            { $pull: { friends: context.user._id } },
             { new: true }
           );
 
