@@ -173,10 +173,10 @@ mutation AddProject($projectInput: ProjectInput!) {
 // {
 //   "data": {
 //     "addProject": {
-//       "_id": "6425aa446b1be9e94a888252",
-//       "firstname": "Valentina",
-//       "lastname": "Guevara",
-//       "username": "val-gee",
+//       "_id": "context.user._id",
+//       "firstname": "String",
+//       "lastname": "String",
+//       "username": "String",
 //       "projects": [
 //         {
 //           "_id": "642632f3c9a9a1ebd9fd9b5b",
@@ -203,7 +203,7 @@ mutation AddProject($projectInput: ProjectInput!) {
 //   }
 // }
 
-export const MUTATION_REMOVE_PROJECT = gql `
+export const MUTATION_REMOVE_PROJECT = gql`
 mutation RemoveProject($removeProjectId: ID!) {
   removeProject(id: $removeProjectId) {
     _id
@@ -311,6 +311,93 @@ mutation CreateOrUpdateUserProfile($profileInput: UserProfileInput!) {
 //       "projects": [{array of project objects with project _id, projectName, and tag names}],
 //       "friends": [{array of friend objects with friends _id }],
 //       "email": "user's email"
+//     }
+//   }
+// }
+
+export const MUTATION_SENDFRIENDREQUEST = gql`
+mutation SendFriendRequest($toUserId: ID!) {
+  sendFriendRequest(toUserId: $toUserId)
+}
+`
+// Response for sendFriendRequest mutation:
+// {
+//   "data": {
+//     "sendFriendRequest": true
+//   }
+// }
+
+export const MUTATION_ADD_FRIEND = gql `
+mutation AddFriend($addFriendId: ID!) {
+  addFriend(id: $addFriendId) {
+    _id
+    firstname
+    lastname
+    username
+    profile {
+      profilePicture
+      bio
+    }
+    projects {
+      _id
+      projectName
+      projectDescription
+    }
+    friends {
+      _id
+    }
+    friendRequests {
+      _id
+    }
+    email
+  }
+}
+`
+// Response for add_friend mutation:
+// {
+//   "data": {
+//     "addFriend": {
+//       "_id": "context.user._id",
+//       "firstname": "String",
+//       "lastname": "String",
+//       "username": "String",
+//       "profile": *profile picture and bio*,
+//       "projects": [*array of projects with _id, projectname, and projectdescription],
+//       "friends": [{*array of friend id objects}],
+//       "friendRequests": [{array of friend request objects}],
+//       "email": "context.user.email"
+//     }
+//   }
+// }
+
+export const MUTATION_REMOVE_FRIEND = gql`
+mutation RemoveFriend($removeFriendId: ID!) {
+  removeFriend(id: $removeFriendId) {
+    _id
+    firstname
+    lastname
+    username
+    friends {
+      _id
+    }
+    friendRequests {
+      _id
+    }
+    email
+  }
+}
+`
+// Response for remove_friend mutation:
+// {
+//   "data": {
+//     "removeFriend": {
+//       "_id": "context.user._id",
+//       "firstname": "String",
+//       "lastname": "String",
+//       "username": "String",
+//       "friends": [{**array of friend _id objects**}],
+//       "friendRequests": [{*8array of friendRequest _id objects**}],
+//       "email": "context.user.email"
 //     }
 //   }
 // }
