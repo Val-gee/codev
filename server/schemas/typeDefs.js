@@ -66,10 +66,12 @@ const typeDefs = gql`
 
   type Query {
     user(_id: ID!): User
+    userByName(username: String!): User
     allUsers: [User]
     project(_id: ID): Project
     allProjects: [Project]
     projectByTag(name: String!): [Project]
+    projectByName(projectName: String!): [Project]
   }
 
   type Mutation {

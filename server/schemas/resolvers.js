@@ -15,6 +15,12 @@ const resolvers = {
       return user;
     },
     //works
+    userByName: async (parent, { username }) => {
+      console.log(username);
+      const user = await User.findOne( {username} );
+      return user;
+    },
+    //works
     allUsers: async () => {
       return User.find().populate("projects");
     },
@@ -35,6 +41,16 @@ const resolvers = {
         .populate("collaborators");
 
       console.log(projects);
+      return projects;
+    },
+    //works
+    projectByName: async(parent, { projectName }) => {
+      console.log(projectName);
+      const projects = await Project.find({ "projectName": projectName })
+      .populate('tags')
+      .populate("owner")
+      .populate("collaborators");
+
       return projects;
     },
   },
