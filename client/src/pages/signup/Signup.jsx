@@ -42,55 +42,59 @@ const Signup = () => {
 
     return (
       <div onSubmit={handleFormSubmit}>
-        <form>
-          <input
-            className="form-input"
-            placeholder="John"
-            name="firstname"
-            type="text"
-            value={signupForm.firstname}
-            onChange={handleChange}
-          />
-          <input
-            className="form-input"
-            placeholder="Smith"
-            name="lastname"
-            type="text"
-            value={signupForm.lastname}
-            onChange={handleChange}
-          />
-          <input
-            className="form-input"
-            placeholder="johnsmith123"
-            name="username"
-            type="text"
-            value={signupForm.username}
-            onChange={handleChange}
-          />
-          <input
-            className="form-input"
-            placeholder="jsmith@example.com"
-            name="email"
-            type="text"
-            value={signupForm.email}
-            onChange={handleChange}
-          />
-          <input
-            className="form-input"
-            placeholder="password"
-            name="password"
-            type="text"
-            value={signupForm.password}
-            onChange={handleChange}
-          />
-          <button
-            className="form-btn"
-            style={{ cursor: "pointer" }}
-            type="submit"
-          >
-            submit
-          </button>
-        </form>
+        {/* {data ? (
+          <Link to="/">home</Link>
+        ) : ( */}
+          <form>
+            <input
+              className="form-input"
+              placeholder="John"
+              name="firstname"
+              type="text"
+              value={signupForm.firstname}
+              onChange={handleChange}
+            />
+            <input
+              className="form-input"
+              placeholder="Smith"
+              name="lastname"
+              type="text"
+              value={signupForm.lastname}
+              onChange={handleChange}
+            />
+            <input
+              className="form-input"
+              placeholder="johnsmith123"
+              name="username"
+              type="text"
+              value={signupForm.username}
+              onChange={handleChange}
+            />
+            <input
+              className="form-input"
+              placeholder="jsmith@example.com"
+              name="email"
+              type="text"
+              value={signupForm.email}
+              onChange={handleChange}
+            />
+            <input
+              className="form-input"
+              placeholder="password"
+              name="password"
+              type="text"
+              value={signupForm.password}
+              onChange={handleChange}
+            />
+            <button
+              className="form-btn"
+              style={{ cursor: "pointer" }}
+              type="submit"
+            >
+              submit
+            </button>
+          </form>
+        {/* )} */}
       </div>
     );
 }
