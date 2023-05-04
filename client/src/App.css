@@ -7,11 +7,10 @@
 * {
   font-family: 'Open Sans', sans-serif;
 }
-/* body {
-  background-color: #F1F8FF;
-} */
+body {
+  background-color: rgb(243, 243, 243);
+}
 footer {
-  background-color: white;
   bottom: 0;
 }
 
