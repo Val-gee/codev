@@ -36,9 +36,11 @@ const Login = (props) => {
         <main>
             <div>
                 <div>
-                    
+                    <h4>Glad to see you back!</h4>
                 </div>
             </div>
         </main>
         )
-}
+};
+
+export default Login
