@@ -11,8 +11,8 @@ module.exports = {
     extend: {},
     colors: {
       transparent: "transparent",
-      navbar: "#51A1FF",
-      mainBackground: "#F1F8FF",
+      navbar: "#1F485B",
+      mainBackground: "#E5E5E5",
       dark: "#434343",
       bodyCards: "#B8D2EA",
       about: "#F8FFFA",
