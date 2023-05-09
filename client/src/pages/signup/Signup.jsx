@@ -54,7 +54,7 @@ const Signup = () => {
         }}
       >
         {data ? (
-          <Link to="/">home</Link>
+          <Link to="/">Home</Link>
         ) : (
           <form>
             <div
