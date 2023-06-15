@@ -17,7 +17,7 @@ const Header = () => {
           // if logged in
           < ul >
             <li>
-              <Link to="/home">
+              <Link to="/">
                 <p className="text-[15px] opacity-80 hover:opacity-100 transition duration-80 ease-in px-2.5">
                   home
                 </p>

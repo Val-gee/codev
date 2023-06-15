@@ -12,7 +12,6 @@ class AuthService {
 
   loggedIn() {
     const token = this.getToken();
-    console.log(token);
     return token && !this.isTokenExpired(token) ? true : false;
   }
 
@@ -28,7 +27,7 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("user_token");
-    window.location.reload();
+    window.location.assign("/");
   }
 
   getToken() {
